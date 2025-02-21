@@ -85,4 +85,12 @@ public class LogementBusiness {
         this.logements = logements;
     }
 
+    public Logement getLogementById(int id) {
+        for (Logement logement : logements) {
+            if (logement.getReference() == id) {
+                return logement;
+            }
+        }
+        return null;
+    }
 }

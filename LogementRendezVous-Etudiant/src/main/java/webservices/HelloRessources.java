@@ -12,7 +12,7 @@ public class HelloRessources {
     @GET
     @Path("/hi")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response sayHello() {
+    public Response Hellosay() {
         return Response.
                 status(200).
                 entity("Hello World!").

@@ -1,15 +1,15 @@
 package webservices;
 
-import entities.Logement;
-import metiers.LogementBusiness;
+import entities.RendezVous;
+import metiers.RendezVousBusiness;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/logement")
-public class LogementRessources {
-    static LogementBusiness help = new LogementBusiness();
+@Path("/RendezVous")
+public class RendezVousRessources {
+    static RendezVousBusiness help = new RendezVousBusiness();
 
     @GET
     @Path("/getAll")
@@ -17,24 +17,24 @@ public class LogementRessources {
     public Response getAll() {
         return Response
                 .status(200).header("Access-Control-Allow-Origin", "*")
-                .entity(help.getLogements())
+                .entity(help.getListeRendezVous())
                 .build();
     }
 
     @GET
     @Path("/get/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getLogementById(@PathParam("id") int id) {
-        Logement logement = help.getLogementById(id);
-        if (logement != null) {
+    public Response getRendezVousById(@PathParam("id") int id) {
+        RendezVous rendezVous = help.getRendezVousById(id);
+        if (rendezVous != null) {
             return Response
                     .status(200).header("Access-Control-Allow-Origin", "*")
-                    .entity(logement)
+                    .entity(rendezVous)
                     .build();
         } else {
             return Response
                     .status(404).header("Access-Control-Allow-Origin", "*")
-                    .entity("Logement not found")
+                    .entity("RendezVous not found")
                     .build();
         }
     }
@@ -43,17 +43,17 @@ public class LogementRessources {
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addLogement(Logement logement) {
-        boolean isAdded = help.addLogement(logement);
+    public Response addRendezVous(RendezVous rendezVous) {
+        boolean isAdded = help.addRendezVous(rendezVous);
         if (isAdded) {
             return Response
                     .status(201).header("Access-Control-Allow-Origin", "*")
-                    .entity("Logement added successfully")
+                    .entity("RendezVous added successfully")
                     .build();
         } else {
             return Response
                     .status(500).header("Access-Control-Allow-Origin", "*")
-                    .entity("Failed to add logement")
+                    .entity("Failed to add RendezVous")
                     .build();
         }
     }
@@ -61,17 +61,17 @@ public class LogementRessources {
     @DELETE
     @Path("/delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteLogement(@PathParam("id") int id) {
-        boolean isDeleted = help.deleteLogement(id);
+    public Response deleteRendezVous(@PathParam("id") int id) {
+        boolean isDeleted = help.deleteRendezVous(id);
         if (isDeleted) {
             return Response
                     .status(200).header("Access-Control-Allow-Origin", "*")
-                    .entity("Logement deleted successfully")
+                    .entity("RendezVous deleted successfully")
                     .build();
         } else {
             return Response
                     .status(404).header("Access-Control-Allow-Origin", "*")
-                    .entity("Logement not found")
+                    .entity("RendezVous not found")
                     .build();
         }
     }
@@ -80,18 +80,19 @@ public class LogementRessources {
     @Path("/update/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateLogement(@PathParam("id") int id, Logement logement) {
-        boolean isUpdated = help.updateLogement(id, logement);
+    public Response updateRendezVous(@PathParam("id") int id, RendezVous rendezVous) {
+        boolean isUpdated = help.updateRendezVous(id, rendezVous);
         if (isUpdated) {
             return Response
                     .status(200).header("Access-Control-Allow-Origin", "*")
-                    .entity("Logement updated successfully")
+                    .entity("RendezVous updated successfully")
                     .build();
         } else {
             return Response
                     .status(404).header("Access-Control-Allow-Origin", "*")
-                    .entity("Logement not found")
+                    .entity("RendezVous not found")
                     .build();
         }
     }
 }
+
